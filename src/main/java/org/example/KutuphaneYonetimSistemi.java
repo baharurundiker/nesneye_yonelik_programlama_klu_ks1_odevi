@@ -3,15 +3,15 @@ package org.example;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-
-// Kitap sınıfı
+//Bahar Üründiker 1220505018 ve Şeyma Altun 1220505006
+// Kitap sınıfını oluşturuyoruz
 class Kitap {
     private String kitapAdi;
-    private String yazar;
+    private String yazarAdi;
 
     public Kitap(String kitapAdi, String yazar) {
         this.kitapAdi = kitapAdi;
-        this.yazar = yazar;
+        this.yazarAdi = yazar;
     }
 
     public String getKitapAdi() {
@@ -19,11 +19,11 @@ class Kitap {
     }
 
     public String getYazar() {
-        return yazar;
+        return yazarAdi;
     }
 }
 
-// Uye sınıfı
+// Üye sınıfını oluşturuyoruz
 class Uye {
     private String ad;
     private int uyeNo;
@@ -42,18 +42,18 @@ class Uye {
     }
 }
 
-// Gorevli sınıfı
+// Gorevli sınıfını oluşturuyoruz
 class Gorevli {
-    private String ad;
+    private String isim;
     private int gorevliNo;
 
     public Gorevli(String ad, int gorevliNo) {
-        this.ad = ad;
+        this.isim = ad;
         this.gorevliNo = gorevliNo;
     }
 
     public String getAd() {
-        return ad;
+        return isim;
     }
 
     public int getGorevliNo() {
@@ -61,7 +61,7 @@ class Gorevli {
     }
 }
 
-// Kutuphane sınıfı
+// Kutuphane sınıfını oluşturuyoruz
 public class KutuphaneYonetimSistemi {
     private static ArrayList<Kitap> kitaplar = new ArrayList<>();
     private static ArrayList<Uye> uyeler = new ArrayList<>();
@@ -72,7 +72,7 @@ public class KutuphaneYonetimSistemi {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("Bahar Üründiker 1220505018");
+            System.out.println("");
             System.out.println("******* Kütüphane Yönetim Sistemi *******");
             System.out.println("1. Kitap Ekle");
             System.out.println("2. Kitap Çıkart");
@@ -87,23 +87,25 @@ public class KutuphaneYonetimSistemi {
             System.out.print("Lütfen yapmak istediğiniz işlemi seçiniz: ");
 
             int secim = scanner.nextInt();
-            scanner.nextLine(); // Dummy bir nextLine() çağrısı, sorunları önlemek için
+            scanner.nextLine(); //Bu satır,
+            // kullanıcıdan tamsayı girişi alındıktan ardından oluşan yeni satır karakterini tüketmek için kullanılıyor.
+            //ileriki seçimlerde karışıklığı önlemek için böyle yazıyoruz.
 
             switch (secim) {
                 case 1:
-                    System.out.print("Kitap Adı: ");
+                    System.out.print("Kitap İsmi: ");
                     String kitapAdi = scanner.nextLine();
                     System.out.print("Yazar: ");
                     String yazar = scanner.nextLine();
                     kitapEkle(kitapAdi, yazar);
                     break;
                 case 2:
-                    System.out.print("Kitap Adı: ");
+                    System.out.print("Kitap İsmi: ");
                     kitapAdi = scanner.nextLine();
                     kitapCikart(kitapAdi);
                     break;
                 case 3:
-                    System.out.print("Üye Adı: ");
+                    System.out.print("Üye İsmi: ");
                     String uyeAdi = scanner.nextLine();
                     System.out.print("Üye Numarası: ");
                     int uyeNo = scanner.nextInt();
@@ -115,7 +117,7 @@ public class KutuphaneYonetimSistemi {
                     uyeCikart(uyeNo);
                     break;
                 case 5:
-                    System.out.print("Görevli Adı: ");
+                    System.out.print("Görevli İsmi: ");
                     String gorevliAdi = scanner.nextLine();
                     System.out.print("Görevli Numarası: ");
                     int gorevliNo = scanner.nextInt();
@@ -131,16 +133,16 @@ public class KutuphaneYonetimSistemi {
                     uyeNo = scanner.nextInt();
                     Uye oduncUye = uyeBul(uyeNo);
                     if (oduncUye != null) {
-                        System.out.print("Kitap Adı: ");
+                        System.out.print("Kitap İsmi: ");
                         kitapAdi = scanner.next();
                         Kitap oduncKitap = kitapBul(kitapAdi);
                         if (oduncKitap != null) {
                             kitapOduncAl(oduncUye, oduncKitap);
                         } else {
-                            System.out.println("Belirtilen kitap bulunamadı.");
+                            System.out.println("Hata! kitap bulunamadı.");
                         }
                     } else {
-                        System.out.println("Belirtilen üye bulunamadı.");
+                        System.out.println("Hata! üye bulunamadı.");
                     }
                     break;
                 case 8:
@@ -150,113 +152,113 @@ public class KutuphaneYonetimSistemi {
                     if (oduncUye != null) {
                         kitapOduncIadeEt(oduncUye);
                     } else {
-                        System.out.println("Belirtilen üye bulunamadı.");
+                        System.out.println("Hata ! üye bulunamadı.");
                     }
                     break;
                 case 9:
                     oduncKitaplariGoster();
                     break;
                 case 0:
-                    System.out.println("Çıkış yapılıyor...");
+                    System.out.println("Çıkış yapılıyor!");
                     System.exit(0);
                 default:
-                    System.out.println("Hatalı seçenek! Lütfen tekrar deneyin.");
+                    System.out.println("Hatalı!tekrar deneyin.");
                     break;
             }
         }
     }
 
-    // Kitap ekleme
+    // Kitap eklemek için yazıyoruz
     private static void kitapEkle(String kitapAdi, String yazar) {
         Kitap kitap = new Kitap(kitapAdi, yazar);
         kitaplar.add(kitap);
         System.out.println("Kitap eklenmiştir: " + kitapAdi);
     }
 
-    // Kitap çıkartma
+    // Kitap çıkartma için yazıyoruz
     private static void kitapCikart(String kitapAdi) {
         Kitap kitap = kitapBul(kitapAdi);
         if (kitap != null) {
             kitaplar.remove(kitap);
             System.out.println("Kitap çıkartılmıştır: " + kitapAdi);
         } else {
-            System.out.println("Belirtilen kitap bulunamadı.");
+            System.out.println("Hata! kitap bulunamadı.");
         }
     }
 
-    // Üye ekleme
+    // Üye ekleme için yazıyoruz
     private static void uyeEkle(String ad, int uyeNo) {
         Uye uye = new Uye(ad, uyeNo);
         uyeler.add(uye);
         System.out.println("Üye eklenmiştir: " + ad);
     }
 
-    // Üye çıkartma
+    // Üye çıkartma için yazıyoruz
     private static void uyeCikart(int uyeNo) {
         Uye uye = uyeBul(uyeNo);
         if (uye != null) {
             uyeler.remove(uye);
             System.out.println("Üye çıkartılmıştır: " + uye.getAd());
         } else {
-            System.out.println("Belirtilen üye bulunamadı.");
+            System.out.println("Hata! üye bulunamadı.");
         }
     }
 
-    // Görevli ekleme
+    // Görevli ekleme için yazıyoruz
     private static void gorevliEkle(String ad, int gorevliNo) {
         Gorevli gorevli = new Gorevli(ad, gorevliNo);
         gorevliler.add(gorevli);
         System.out.println("Görevli eklenmiştir: " + ad);
     }
 
-    // Görevli çıkartma
+    // Görevli çıkartma için yazıyoruz
     private static void gorevliCikart(int gorevliNo) {
         Gorevli gorevli = gorevliBul(gorevliNo);
         if (gorevli != null) {
             gorevliler.remove(gorevli);
             System.out.println("Görevli çıkartılmıştır: " + gorevli.getAd());
         } else {
-            System.out.println("Belirtilen görevli bulunamadı.");
+            System.out.println("Hata! görevli bulunamadı.");
         }
     }
 
-    // Üye bulma
+    // Üye bulma için yazıyoruz
     private static Uye uyeBul(int uyeNo) {
         return uyeler.stream().filter(u -> u.getUyeNo() == uyeNo).findFirst().orElse(null);
     }
 
-    // Görevli bulma
+    // Görevli bulma için yazıyoruz
     private static Gorevli gorevliBul(int gorevliNo) {
         return gorevliler.stream().filter(g -> g.getGorevliNo() == gorevliNo).findFirst().orElse(null);
     }
 
-    // Kitap bulma
+    // Kitap bulma için yazıyoruz
     private static Kitap kitapBul(String kitapAdi) {
         return kitaplar.stream().filter(k -> k.getKitapAdi().equals(kitapAdi)).findFirst().orElse(null);
     }
 
-    // Kitap ödünç alma
+    // Kitap ödünç alma için yazıyoruz
     private static void kitapOduncAl(Uye uye, Kitap kitap) {
         if (!oduncKitaplar.containsKey(uye)) {
             oduncKitaplar.put(uye, kitap);
-            System.out.println(uye.getAd() + " adlı üyeye " + kitap.getKitapAdi() + " kitabı ödünç verilmiştir.");
+            System.out.println(uye.getAd() + " isimli üyeye " + kitap.getKitapAdi() + " kitabı ödünç verilmiştir.");
         } else {
-            System.out.println(uye.getAd() + " adlı üye zaten bir kitap ödünç almış durumda.");
+            System.out.println(uye.getAd() + " isimli üye zaten bir kitap ödünç almış.");
         }
     }
 
-    // Kitap ödünç iade etme
+    // Kitap ödünç iade etme için yazıyoruz
     private static void kitapOduncIadeEt(Uye uye) {
         Kitap oduncKitap = oduncKitaplar.get(uye);
         if (oduncKitap != null) {
             oduncKitaplar.remove(uye);
-            System.out.println(uye.getAd() + " adlı üyenin " + oduncKitap.getKitapAdi() + " kitabı kütüphaneye iade edilmiştir.");
+            System.out.println(uye.getAd() + " isimli üyenin " + oduncKitap.getKitapAdi() + " kitabı kütüphaneye iade edilmiştir!");
         } else {
-            System.out.println(uye.getAd() + " adlı üye ödünç kitap almamış durumda.");
+            System.out.println(uye.getAd() + " isimli üye ödünç kitap almamış.");
         }
     }
 
-    // Ödünç alınan kitapları gösterme
+    // Ödünç alınan kitapları gösterme için yazıyoruz
     private static void oduncKitaplariGoster() {
         System.out.println("Şu anda ödünç alınan kitaplar:");
         for (HashMap.Entry<Uye, Kitap> entry : oduncKitaplar.entrySet()) {
